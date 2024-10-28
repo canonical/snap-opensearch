@@ -43,8 +43,6 @@ jobs:
       - id: build-snap
         name: Build snap
         uses: snapcore/action-build@v1
-        with:
-          snapcraft-channel: 7.x/candidate
 
       - name: Upload built snap job artifact
         uses: actions/upload-artifact@v3
