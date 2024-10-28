@@ -182,6 +182,7 @@ parts:
       - ca-certificates-java
       - ssl-cert
       - openssl
+      - openjdk-21-jre-headless
     stage-packages:
       - openjdk-21-jdk-headless
     override-build: |
