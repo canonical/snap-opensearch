@@ -61,6 +61,11 @@ jobs:
         uses: actions/checkout@v3
         with:
           fetch-depth: 0
+      
+      - name: Install snapd
+        run: |
+          sudo apt update
+          sudo apt install -y snapd
 
       - name: Upgrade snapd
         run: |
