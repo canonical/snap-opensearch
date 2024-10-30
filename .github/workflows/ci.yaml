@@ -64,7 +64,7 @@ jobs:
           SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.STORE_LOGIN }}
         with:
           snap: opensearch_${{env.version}}_amd64.snap
-          release: ${{env.channel}}/core_24_04
+          release: ${{env.channel}}/core2404
 
   test:
     name: Test Snap
