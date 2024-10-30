@@ -164,7 +164,7 @@ parts:
       - libcrypt1
       - libexpat1
       - zlib1g
-      - libc6
+
 
   wrapper-scripts:
     plugin: nil
@@ -185,6 +185,7 @@ parts:
       - openssl
       - openjdk-21-jre-headless
     stage-packages:
+      - libc6
       - openjdk-21-jdk-headless
     override-build: |
       # update deps
