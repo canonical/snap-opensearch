@@ -62,13 +62,19 @@ jobs:
         with:
           fetch-depth: 0
       
-      - name: Install snapd
+      - name: Upgrade linux deps
         run: |
-          sudo apt update
-          sudo apt install -y snapd
-
-      - name: Upgrade snapd
-        run: |
+          sudo apt-get update
+          
+          # install security updates
+          sudo apt-get -s dist-upgrade \
+            | grep "^Inst" \
+            | grep -i securi \
+            | awk -F " " {'print $2'} \
+            | xargs sudo apt-get install -y
+          
+          sudo apt-get autoremove -y
+          sudo apt-get clean -y
           sudo snap refresh snapd
 
       - name: Download snap file
