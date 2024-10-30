@@ -62,6 +62,10 @@ jobs:
         with:
           fetch-depth: 0
       
+      - name: Install required dependencies
+        run: |
+          sudo snap install yq
+
       - name: Upgrade linux deps
         run: |
           sudo apt-get update
