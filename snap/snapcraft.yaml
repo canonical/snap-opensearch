@@ -164,6 +164,7 @@ parts:
       - libcrypt1
       - libexpat1
       - zlib1g
+      - libc6
 
 
   wrapper-scripts:
