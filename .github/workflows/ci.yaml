@@ -53,7 +53,7 @@ jobs:
       - name: Set snap release channel
         run: |
           version="$(cat snap/snapcraft.yaml | yq .version)"
-          channel="${version%%.*}/${{edge}}"
+          channel="${version%%.*}/edge"
           
           echo "version=${version}" >> $GITHUB_ENV
           echo "channel=${channel}" >> $GITHUB_ENV
