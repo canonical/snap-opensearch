@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     name: Build Snap
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 60
     outputs:
       snap-file: ${{ steps.build-snap.outputs.snap }}
@@ -52,7 +52,7 @@ jobs:
 
   test:
     name: Test Snap
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     timeout-minutes: 15
     needs:
       - build
