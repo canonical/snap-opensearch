@@ -11,7 +11,7 @@ on:
 jobs:
   build:
     name: Build Snap
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     timeout-minutes: 60
     outputs:
       snap-file: ${{ steps.build-snap.outputs.snap }}
@@ -21,24 +21,20 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Install required dependencies
-        run: |
-          sudo snap install yq
-
-      - name: Upgrade linux deps
-        run: |
-          sudo apt-get update
+      # - name: Upgrade linux deps
+      #   run: |
+      #     sudo apt-get update
           
-          # install security updates
-          sudo apt-get -s dist-upgrade \
-            | grep "^Inst" \
-            | grep -i securi \
-            | awk -F " " {'print $2'} \
-            | xargs sudo apt-get install -y
+      #     # install security updates
+      #     sudo apt-get -s dist-upgrade \
+      #       | grep "^Inst" \
+      #       | grep -i securi \
+      #       | awk -F " " {'print $2'} \
+      #       | xargs sudo apt-get install -y
           
-          sudo apt-get autoremove -y
-          sudo apt-get clean -y
-          sudo snap refresh snapd
+      #     sudo apt-get autoremove -y
+      #     sudo apt-get clean -y
+      #     sudo snap refresh snapd
 
       - id: build-snap
         name: Build snap
@@ -52,7 +48,7 @@ jobs:
 
   test:
     name: Test Snap
-    runs-on: ubuntu-24.04
+    runs-on: ubuntu-latest
     timeout-minutes: 15
     needs:
       - build
