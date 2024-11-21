@@ -179,8 +179,8 @@ jobs:
         run: |
           echo "TEST" | sudo tee -a testkey
 
-          sudo -E "${OPENSEARCH_BIN}"/opensearch-keystore add-file s3.client.default.access_key ${PWD}/testkey
-          sudo -E "${OPENSEARCH_BIN}"/opensearch-keystore add-file s3.client.default.secret_key ${PWD}/testkey
+          sudo opensearch.keystore add-file s3.client.default.access_key ${PWD}/testkey
+          sudo opensearch.keystore add-file s3.client.default.secret_key ${PWD}/testkey
 
           sudo snap restart opensearch.daemon
           sleep 20s
@@ -243,6 +243,6 @@ jobs:
           OPENSEARCH_LIB: /var/snap/opensearch/current/usr/share/opensearch/lib
           OPENSEARCH_PATH_CERTS: /var/snap/opensearch/current/etc/opensearch/certificates
         run: |
-          sudo -E "${OPENSEARCH_BIN}"/opensearch-plugin remove repository-s3
-          sudo -E "${OPENSEARCH_BIN}"/opensearch-keystore remove s3.client.default.access_key
-          sudo -E "${OPENSEARCH_BIN}"/opensearch-keystore remove s3.client.default.secret_key
+          sudo opensearch.plugins-remove repository-s3
+          sudo opensearch.keystore remove s3.client.default.access_key
+          sudo opensearch.keystore remove s3.client.default.secret_key

@@ -141,6 +141,78 @@ apps:
       - network
       - network-bind
 
+  cli:
+    command: opt/opensearch/bin-wrapper.sh
+    plugs:
+      - network
+      - network-bind
+    environment:
+      bin_script: opensearch-cli
+
+  env:
+    command: opt/opensearch/bin-wrapper.sh
+    plugs:
+      - network
+      - network-bind
+    environment:
+      bin_script: opensearch-env
+
+  env-from-file:
+    command: opt/opensearch/bin-wrapper.sh
+    plugs:
+      - network
+      - network-bind
+    environment:
+      bin_script: opensearch-env-from-file
+
+  keystore:
+    command: opt/opensearch/bin-wrapper.sh
+    plugs:
+      - network
+      - network-bind
+    environment:
+      bin_script: opensearch-keystore
+
+  node:
+    command: opt/opensearch/bin-wrapper.sh
+    plugs:
+      - network
+      - network-bind
+    environment:
+      bin_script: opensearch-node
+
+  shard:
+    command: opt/opensearch/bin-wrapper.sh
+    plugs:
+      - network
+      - network-bind
+    environment:
+      bin_script: opensearch-shard
+
+  upgrade:
+    command: opt/opensearch/bin-wrapper.sh
+    plugs:
+      - network
+      - network-bind
+    environment:
+      bin_script: opensearch-upgrade
+
+  performance-analyzer-agent:
+    command: opt/opensearch/bin-wrapper.sh
+    plugs:
+      - network
+      - network-bind
+    environment:
+      bin_script: opensearch-performance-analyzer/performance-analyzer-agent
+
+  performance-analyzer-agent-cli:
+    command: opt/opensearch/bin-wrapper.sh
+    plugs:
+      - network
+      - network-bind
+    environment:
+      bin_script: opensearch-performance-analyzer/performance-analyzer-agent-cli
+
 parts:
   dependencies:
     plugin: nil
@@ -183,7 +255,6 @@ parts:
       - ca-certificates-java
       - ssl-cert
       - openssl
-      - openjdk-21-jre-headless
     stage-packages:
       - openjdk-21-jdk-headless
     override-build: |
