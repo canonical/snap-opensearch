@@ -2,5 +2,5 @@
 
 
 # Fetch the list of installed plugins
-INSTALLED_PLUGINS=$("${OPENSEARCH_HOME}"/bin/opensearch-plugin list)
+INSTALLED_PLUGINS=$("${OPENSEARCH_BIN}"/opensearch-plugin list)
 echo "${INSTALLED_PLUGINS}"

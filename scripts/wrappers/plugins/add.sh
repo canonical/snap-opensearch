@@ -52,11 +52,11 @@ function parse_args () {
 function install_plugin () {
 
     # Fetch the list of installed plugins
-    INSTALLED_PLUGINS=$("${OPENSEARCH_HOME}"/bin/opensearch-plugin list)
+    INSTALLED_PLUGINS=$("${OPENSEARCH_BIN}"/opensearch-plugin list)
 
     if ! echo "${INSTALLED_PLUGINS}" | grep -q "$1";
     then
-        echo y | "${OPENSEARCH_HOME}"/bin/opensearch-plugin install "$2"
+        echo y | "${OPENSEARCH_BIN}"/opensearch-plugin install "$2"
     fi
 
     INSTALLATION_PATH="${OPENSEARCH_PLUGINS}/$1"

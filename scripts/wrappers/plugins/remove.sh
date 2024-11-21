@@ -62,7 +62,7 @@ function set_defaults () {
 function remove_plugin () {
 
     # Fetch the list of installed plugins
-    INSTALLED_PLUGINS=$("${OPENSEARCH_HOME}"/bin/opensearch-plugin list)
+    INSTALLED_PLUGINS=$("${OPENSEARCH_BIN}"/opensearch-plugin list)
 
     if ! echo "${INSTALLED_PLUGINS}" | grep -q "$1";
     then
@@ -75,7 +75,7 @@ function remove_plugin () {
         cmd_args+=( "--purge" )
     fi
 
-    echo y | "${OPENSEARCH_HOME}"/bin/opensearch-plugin remove "${cmd_args[@]}"
+    echo y | "${OPENSEARCH_BIN}"/opensearch-plugin remove "${cmd_args[@]}"
     echo "Plugin: ${name} removed."
 }
 
