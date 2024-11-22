@@ -99,19 +99,6 @@ curl --cacert node-cm0.pem -XGET https://admin:admin@localhost:9200/_cluster/hea
 }
 ```
 
-## Running OpenSearch CLI commands not exposed by the snap:
-In some cases, users may need to run cli commands that are not exposed by the OpenSearch snap. To achieve this, those commands must be run as the `snap_daemon` user with the required environment variables passed: 
-
-```
-$ sudo -u snap_daemon \
-	    OPENSEARCH_JAVA_HOME=/snap/opensearch/current/usr/lib/jvm/java-21-openjdk-amd64 \
-	    OPENSEARCH_PATH_CONF=/var/snap/opensearch/current/etc/opensearch \
-	    OPENSEARCH_HOME=/var/snap/opensearch/current/usr/share/opensearch \
-	    OPENSEARCH_LIB=/var/snap/opensearch/current/usr/share/opensearch/lib \
-	    OPENSEARCH_PATH_CERTS=/var/snap/opensearch/current/etc/opensearch/certificates \
-	    /snap/opensearch/current/usr/share/opensearch/bin/<command> [options]
-```
-
 ## License
 The Opensearch Snap is free software, distributed under the Apache
 Software License, version 2.0. See
