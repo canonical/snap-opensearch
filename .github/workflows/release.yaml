@@ -6,7 +6,8 @@ env:
 on:
   push:
     branches:
-      - main
+      - '2/edge'
+  workflow_call:
 
 jobs:
   ci-tests:
@@ -42,9 +43,18 @@ jobs:
           echo "channel=${channel}" >> $GITHUB_ENV
 
       - name: Publish snap to Store
+        id: publish
         uses: snapcore/action-publish@v1
         env:
           SNAPCRAFT_STORE_CREDENTIALS: ${{ secrets.STORE_LOGIN }}
         with:
           snap: opensearch_${{env.version}}_amd64.snap
           release: ${{env.channel}}
+
+      - name: Upload snapcraft logs
+        if: ${{ failure() && steps.publish.outcome == 'failure' }}
+        uses: actions/upload-artifact@v3
+        with:
+          name: snapcraft-release-logs
+          path: ~/.local/state/snapcraft/log/
+          if-no-files-found: error
