@@ -132,17 +132,17 @@ jobs:
           OPENSEARCH_PATH_CERTS: /var/snap/opensearch/current/etc/opensearch/certificates
         run: |
           # Prometheus Exporter appears in plugins listing
-          prometheus_is_there=$(sudo opensearch.plugins-list | grep prometheus-exporter)
+          prometheus_is_there=$(sudo opensearch.plugin list | grep prometheus-exporter)
           if [ ! "$prometheus_is_there" ]; then
             exit 1
           fi
           # repository-s3 appears in plugins listing
-          repository_s3_is_there=$(sudo opensearch.plugins-list | grep repository-s3)
+          repository_s3_is_there=$(sudo opensearch.plugin list | grep repository-s3)
           if [ ! "$repository_s3_is_there" ]; then
             exit 1
           fi
           # repository-gcs appears in plugins listing
-          repository_gcs_is_there=$(sudo opensearch.plugins-list | grep repository-gcs)
+          repository_gcs_is_there=$(sudo opensearch.plugin list | grep repository-gcs)
           if [ ! "$repository_gcs_is_there" ]; then
             exit 1
           fi
@@ -177,10 +177,10 @@ jobs:
           OPENSEARCH_LIB: /var/snap/opensearch/current/usr/share/opensearch/lib
           OPENSEARCH_PATH_CERTS: /var/snap/opensearch/current/etc/opensearch/certificates
         run: |
-          echo "TEST" | sudo tee -a testkey
+          echo "TEST" | sudo tee -a ${OPENSEARCH_PATH_CONF}/testkey
 
-          sudo opensearch.keystore add-file s3.client.default.access_key ${PWD}/testkey
-          sudo opensearch.keystore add-file s3.client.default.secret_key ${PWD}/testkey
+          sudo opensearch.keystore add-file s3.client.default.access_key ${OPENSEARCH_PATH_CONF}/testkey
+          sudo opensearch.keystore add-file s3.client.default.secret_key ${OPENSEARCH_PATH_CONF}/testkey
 
           sudo snap restart opensearch.daemon
           sleep 20s
@@ -243,6 +243,6 @@ jobs:
           OPENSEARCH_LIB: /var/snap/opensearch/current/usr/share/opensearch/lib
           OPENSEARCH_PATH_CERTS: /var/snap/opensearch/current/etc/opensearch/certificates
         run: |
-          sudo opensearch.plugins-remove repository-s3
+          sudo opensearch.plugin remove repository-s3
           sudo opensearch.keystore remove s3.client.default.access_key
           sudo opensearch.keystore remove s3.client.default.secret_key

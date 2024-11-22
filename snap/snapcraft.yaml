@@ -114,15 +114,6 @@ apps:
   setup:
     command: opt/opensearch/setup.sh
 
-  plugin-add:
-    command: opt/opensearch/plugins/add.sh
-
-  plugins-list:
-    command: opt/opensearch/plugins/list.sh
-
-  plugins-remove:
-    command: opt/opensearch/plugins/remove.sh
-
   test-cluster-health-green:
     command: opt/opensearch/tests/test-cluster-health-green.sh
     plugs:
@@ -140,6 +131,14 @@ apps:
     plugs:
       - network
       - network-bind
+
+  plugin:
+    command: opt/opensearch/bin-wrapper.sh
+    plugs:
+      - network
+      - network-bind
+    environment:
+      bin_script: opensearch-plugin
 
   cli:
     command: opt/opensearch/bin-wrapper.sh
@@ -291,11 +290,6 @@ parts:
           mv "${CRAFT_PART_INSTALL}/${res}" "${CRAFT_PART_INSTALL}/usr/share/opensearch/"
       done
       chmod -R 755 "${CRAFT_PART_INSTALL}/usr/share/opensearch/bin"
-
-      # It is important to correct the user permissions for the opensearch.keystore file, after the script is executed.
-      # Given we know which user is going to be used for the daemon, we can set this correction in the keystore script.
-      # TODO: we should perhaps NOT alter the source script - but until we find a better alternative UX wise we keep it
-      echo 'chown snap_daemon:root /var/snap/opensearch/current/etc/opensearch/opensearch.keystore' >> "${CRAFT_PART_INSTALL}"/usr/share/opensearch/bin/opensearch-keystore
 
       # Final clean-up
       rm "${archive}"
