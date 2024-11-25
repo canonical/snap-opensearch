@@ -212,6 +212,11 @@ apps:
     environment:
       bin_script: opensearch-performance-analyzer/performance-analyzer-agent-cli
 
+  keytool:
+    command: usr/lib/jvm/java-21-openjdk-amd64/bin/keytool
+    plugs:
+      - mount-observe
+
 parts:
   dependencies:
     plugin: nil
