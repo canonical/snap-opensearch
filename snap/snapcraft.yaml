@@ -132,7 +132,7 @@ apps:
       - network
       - network-bind
 
-  opensearch:
+  opensearch-bin:
     command: opt/opensearch/bin-wrapper.sh
     plugs:
       - network
