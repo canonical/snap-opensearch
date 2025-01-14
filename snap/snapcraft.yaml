@@ -132,6 +132,14 @@ apps:
       - network
       - network-bind
 
+  opensearch:
+    command: opt/opensearch/bin-wrapper.sh
+    plugs:
+      - network
+      - network-bind
+    environment:
+      bin_script: opensearch
+
   plugin:
     command: opt/opensearch/bin-wrapper.sh
     plugs:
